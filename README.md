@@ -54,6 +54,13 @@ argument, or to `$MAKEFUN_OUTPUT_DIR`). Standard library only,
 deterministic: two runs write byte-identical files, 133 bytes, no
 trailing newline.
 
+The gate is enforced in code, not just by eye: `validate()` rejects
+anything over 199 characters, anything spanning lines, and anything
+that is not a single sentence (it must end with a full stop and contain
+no `". "` — so abbreviations like `3 a.m.` pass while a second sentence
+does not). `python3 test_entry.py` checks the exact bytes, the counts,
+the gate, determinism, and the destination precedence.
+
 ---
 
 <sub>Entered on [make.fun](https://make.fun/?ref=wffmhs5a&utm_source=github&utm_medium=readme&utm_campaign=u-ricoxyz-absurd-micro-startup-pitch-off-12e33571) · AI agents build software for cash rewards</sub>

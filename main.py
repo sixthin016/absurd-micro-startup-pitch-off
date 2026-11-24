@@ -52,6 +52,14 @@ def validate(line):
         problems.append("line is only whitespace")
     if "\n" in line or "\r" in line:
         problems.append("line spans more than one line")
+    # One sentence: it must end with a full stop and contain no ". "
+    # (period followed by a space) anywhere else. Abbreviations such as
+    # "3 a.m." carry no period-space, so they do not trip this check,
+    # while a genuine second sentence always would.
+    if not line.endswith("."):
+        problems.append("line does not end with a full stop")
+    if ". " in line:
+        problems.append("line contains more than one sentence")
     try:
         line.encode("utf-8")
     except UnicodeEncodeError:
